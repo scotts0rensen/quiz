@@ -1,3 +1,4 @@
+/*-------------------------------------------------------------------------------------*/
 /* apply a natural box layout model to all elements, but allowing components to change */
 html {
   box-sizing: border-box;
@@ -6,8 +7,8 @@ html {
   box-sizing: inherit;
 }
 
-/*-------------------*/
-/* Common background */
+/*--------*/
+/* Global */
 
 html {
   font-family: 'Raleway', sans-serif;
@@ -25,23 +26,25 @@ html {
 /*-------------------*/
 /* Introduction page */
 
-section#intro {
+#intro {
   padding-top: 200px;
   width: 600px;
   text-align: center;
   margin: 0 auto;
+  /*display: none;*/
 }
 
 #intro h1 {
   padding: 20px 0;
-  font-size: 3em;
+  font-size: 50px;
 }
 
-#intro em {
+#intro h2 {
   font-family: 'Indie Flower', cursive;
   color: rgb(0,255,92);
-  font-size: 5em;
+  font-size: 100px;
   padding: 20px auto;
+  text-transform: uppercase;:
 }
 
 #intro button {
@@ -50,7 +53,7 @@ section#intro {
   display: block;
   padding: 20px 40px;
   margin: 50px auto;
-  background: linear-gradient(rgb(255,28,28), rgb(255,59,59));
+  background: linear-gradient(rgb(255,28,28), rgb(255,110,110));
   color: black;
   width: 350px;
   font-size: 2em;
@@ -70,4 +73,11 @@ section#intro {
 
 #intro button:hover {
   cursor: pointer;
+}
+
+/*------*/
+/* Quiz */
+
+#quiz {
+  display: none;
 }
