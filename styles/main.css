@@ -129,8 +129,8 @@ html {
 
 #quiz .results {
   display: none;
-  font-size: 24px;
-  padding-top: 20px;
+  font-size: 26px;
+  padding-top: 40px;
 }
 
 #quiz button {
