@@ -27,11 +27,11 @@ html {
 /* Introduction page */
 
 #intro {
-  padding-top: 200px;
+  padding-top: 80px;
   width: 800px;
   text-align: center;
   margin: 0 auto;
-  display: none;
+  /*display: none;*/
 }
 
 #intro h1 {
@@ -42,9 +42,9 @@ html {
 #intro h2 {
   font-family: 'Indie Flower', cursive;
   color: rgb(0,255,92);
+  text-transform: uppercase;
   font-size: 100px;
   padding: 20px auto;
-  text-transform: uppercase;:
 }
 
 #intro button {
@@ -53,7 +53,7 @@ html {
   display: block;
   padding: 20px 40px;
   margin: 50px auto;
-  background: linear-gradient(rgb(255,28,28), rgb(255,110,110));
+  background: linear-gradient(rgb(28,255,119), rgb(169,255,166));
   color: black;
   width: 350px;
   font-size: 2em;
@@ -79,7 +79,7 @@ html {
 /* Quiz */
 
 #quiz {
-  /*display: none;*/
+  display: none;
   padding-top: 50px;
   width: 600px;
   text-align: center;
@@ -88,7 +88,10 @@ html {
 
 #quiz .title {
   padding: 20px 0 10px 0;
-  font-size: 50px;
+  font-family: 'Indie Flower', cursive;
+  color: rgb(0,255,92);
+  text-transform: uppercase;
+  font-size: 60px;
 }
 
 #quiz .score {
@@ -96,7 +99,7 @@ html {
 }
 
 #quiz .question {
-  padding: 40px 0 10px 0;
+  padding: 40px 0 20px 0;
   font-size: 26px;
 }
 
@@ -108,15 +111,41 @@ html {
 
 #quiz .photos img {
   width: 250px;
-  margin: 10px;
+  margin: 5px;
   border: solid 5px transparent;
 }
 
 #quiz img:hover {
-  border: solid 5px rgb(167,167,167);
+  border: solid 5px white;
+}
+
+#quiz .correct {
+  border: solid 5px lime !important;
+}
+
+#quiz .wrong {
+  border: solid 5px red !important;
 }
 
 #quiz .results {
+  display: none;
   font-size: 24px;
   padding-top: 20px;
+}
+
+#quiz button {
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px #000000;
+  display: block;
+  padding: 10px 40px;
+  margin: 20px auto;
+  background: linear-gradient(rgb(28,255,119), rgb(169,255,166));
+  color: black;
+  width: 170px;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+#quiz button:hover {
+  background: linear-gradient(rgba(28,255,119,.75), rgba(169,255,166,.75));
 }
