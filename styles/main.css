@@ -28,10 +28,10 @@ html {
 
 #intro {
   padding-top: 200px;
-  width: 600px;
+  width: 800px;
   text-align: center;
   margin: 0 auto;
-  /*display: none;*/
+  display: none;
 }
 
 #intro h1 {
@@ -79,5 +79,44 @@ html {
 /* Quiz */
 
 #quiz {
-  display: none;
+  /*display: none;*/
+  padding-top: 50px;
+  width: 600px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#quiz .title {
+  padding: 20px 0 10px 0;
+  font-size: 50px;
+}
+
+#quiz .score {
+  font-size: 30px;
+}
+
+#quiz .question {
+  padding: 40px 0 10px 0;
+  font-size: 26px;
+}
+
+#quiz .status {
+  position: relative;
+  font-size: 24px;
+  margin: 0 20px 50px 20px;
+}
+
+#quiz .photos img {
+  width: 250px;
+  margin: 10px;
+  border: solid 5px transparent;
+}
+
+#quiz img:hover {
+  border: solid 5px rgb(167,167,167);
+}
+
+#quiz .results {
+  font-size: 24px;
+  padding-top: 20px;
 }

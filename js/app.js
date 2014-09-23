@@ -1,7 +1,9 @@
 $(document).ready( function() {
 
   $("#start").click(function () {
-    $("#intro").fadeOut();
+    $("#intro").fadeOut("fast", function() {
+      $("#quiz").fadeIn("fast");
+    });
   });
 
 });
