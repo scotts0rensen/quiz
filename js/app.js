@@ -25,9 +25,8 @@ function startQuiz() {
 // =================================
 function displayQuestion(question) {
   // remove existing photo highlights
-  var images = $(".photos").find("img");
-  images.removeClass("wrong");
-  images.removeClass("correct");
+  $(".wrong").removeClass("wrong");
+  $(".correct").removeClass("correct");
 
   // hide results
   $(".results").fadeOut("fast");
