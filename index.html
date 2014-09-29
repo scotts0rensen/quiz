@@ -35,9 +35,13 @@
     <!-- ++++++ Quiz ++++++ -->
 
     <section id="quiz">
-      <div class="stats">
-        <p class="question-count">Question: 1 of 5</p>
-        <p class="score">Score: 0</p>
+      <div class="status">
+        <p class="question-status">
+          Question: <span id="question-index"></span>
+                    of
+                    <span id="question-count"></span>
+        </p>
+        <p class="score-status">Score: <span id="score">0</span></p>
       </div>
 
       <div class="question"></div>
@@ -48,7 +52,7 @@
       </div>
 
       <div class="results">
-        <p>Correct!  Poison Ivy has leaves of 3..... lalalalalala</p>
+        <p class="results-text">Correct!  Poison Ivy has leaves of 3..... lalalalalala</p>
         <button id="next">Next</button>
       </div>
 
