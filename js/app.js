@@ -1,41 +1,51 @@
 $(document).ready( function() {
-
-  $("#start").click( function () {
-    $("#intro").fadeOut("fast", function() {
-      $("#quiz").fadeIn("fast");
-    });
-  });
-
-  $("#photo1").click( function() {
-    $("#photo1").addClass("correct");
-    $("#photo2").addClass("wrong");
-    $(".results").fadeIn("fast");
-  });
-
-  startQuiz();
+  $("#start").click( startQuiz );
+  $(".photos img").click( chooseOption );
 });
 
 var questions = getQuestions();
-var currentQuestion;
+var currentQuestionIndex;
 
 function startQuiz() {
-  currentQuestion = 0;
-  displayCurrentQuestion();
+  // switch from introduction to quiz if applicable
+  if ($("#intro").is(":visible")) {
+    $("#intro").fadeOut("fast", function() {
+      $("#quiz").fadeIn("fast");
+    });
+  }
+
+  currentQuestionIndex = 0;
+  setCurrentQuestion();
 }
 
-function displayCurrentQuestion() {
-  question = getCurrentQuestion();
+function setCurrentQuestion() {
+  var question = getCurrentQuestion();
   $(".question").html(question.questionText);
-  $("#photo1").attr("src",question.option1.picture);
-  $("#photo2").attr("src",question.option2.picture);
+
+  setOption($("#photo1"), question.option1);
+  setOption($("#photo2"), question.option2);
 }
+
+function setOption(photo, option) {
+  photo.data("option", option);
+  photo.attr("src", option.picture);
+}
+
+function chooseOption() {
+  var option = $(this).data("option");
+  if (option.isCorrect)
+    $(this).addClass("correct");
+  else
+    $(this).addClass("wrong");
+  $(".results").fadeIn("fast");
+};
 
 function getCurrentQuestion() {
-  return questions[currentQuestion];
+  return questions[currentQuestionIndex];
 }
 
 function getQuestions() {
-  var question1 = new Question("Whichhh one is poison ivy?",
+  var question1 = new Question("Which one is poison ivy?",
     new Option("images/test2.jpg", true, "Correct! Poison ivy has leaves of 3."),
     new Option("images/test1.jpg", false, "Sorry. You chose fox something.  Poison ivy has leaves of 3."));
 
