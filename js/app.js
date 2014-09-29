@@ -1,4 +1,5 @@
 // =================================
+// document ready (events for buttons)
 $(document).ready( function() {
   $("#start").click( startQuiz );
   $(".photos img").click( answer );
@@ -18,32 +19,29 @@ function startQuiz() {
     });
   }
 
-  game.resetGame();
-  setCurrentQuestion();
+  displayQuestion(game.resetGame());
 }
 
 // =================================
-function setCurrentQuestion() {
-  // remove photo higlights
+function displayQuestion(question) {
+  // remove existing photo highlights
   $(".photos img").removeClass("wrong");
   $(".photos img").removeClass("correct");
 
   // hide results
   $(".results").fadeOut("fast");
 
-  // set current question
-  var question = game.getCurrentQuestion();
-
+  // display question
   $("#question-index").html( question.number );
   $("#question-count").html( game.getQuestionsSize() );
   $("#score").text( game.score );
   $(".question").html( question.questionText );
-  setPhoto($("#photo1"), question.option1);
-  setPhoto($("#photo2"), question.option2);
+  displayPhoto($("#photo1"), question.option1);
+  displayPhoto($("#photo2"), question.option2);
 }
 
 // =================================
-function setPhoto(photo, option) {
+function displayPhoto(photo, option) {
   photo.data("option", option);
   photo.attr("src", option.picture);
 }
@@ -69,30 +67,27 @@ function answer() {
     $(this).siblings().addClass("correct");
   }
 
-  // set and show results
+  displayResults(option);
+}
+
+// =================================
+function displayResults(option) {
   $("#score").text( game.score );
   $(".results-text").text(option.resultText);
   $(".results").fadeIn("fast");
-  if (game.onLastQuestion())
-    $("#next").text("Finish")
-  else
-    $("#next").text("Next")
+  $("#next").text( game.onLastQuestion() ? "Finish" : "Next");
 }
 
 // =================================
 function next() {
-  if (game.onLastQuestion()) {
-    game.resetGame();
-  }
-  else {
-    game.incrementQuestion();
-  }
-  setCurrentQuestion();
+  var question = game.onLastQuestion() ? game.resetGame() : game.incrementQuestion();
+  displayQuestion(question);
 }
 
 // =================================
 // Classes
 
+// =================================
 function Game() {
   this.currentQuestionIndex = 0;
   this.score = 0;
@@ -100,9 +95,14 @@ function Game() {
   this.resetGame = function() {
     this.currentQuestionIndex = 0;
     this.score = 0;
+    this.resetQuestions();
+    return this.getCurrentQuestion();
+  };
+
+  this.resetQuestions = function() {
     for (var i = 0; i < this.questions.length; i++)
       this.questions[i].answered = false;
-  };
+  }
 
   this.getQuestionsSize = function() {
     return this.questions.length;
@@ -120,7 +120,7 @@ function Game() {
   };
 
   this.onLastQuestion = function () {
-    return this.currentQuestionIndex === this.questions.length - 1;
+    return this.currentQuestionIndex === this.getQuestionsSize() - 1;
   };
 
   this.createQuestions = function() {
@@ -139,6 +139,7 @@ function Game() {
   this.resetGame();
 }
 
+// =================================
 function Question(number, questionText, option1, option2) {
   this.number = number;
   this.questionText = questionText;
@@ -147,6 +148,7 @@ function Question(number, questionText, option1, option2) {
   this.answered = false;
 }
 
+// =================================
 function Option(picture, isCorrect, resultText) {
   this.picture = picture;
   this.isCorrect = isCorrect;
