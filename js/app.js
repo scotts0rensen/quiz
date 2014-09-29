@@ -2,7 +2,7 @@
 // document ready (events for buttons)
 $(document).ready( function() {
   $("#start").click( startQuiz );
-  $(".photos img").click( answer );
+  $(".photos").find("img").click( answer );
   $("#next").click( next );
 });
 
@@ -25,8 +25,9 @@ function startQuiz() {
 // =================================
 function displayQuestion(question) {
   // remove existing photo highlights
-  $(".photos img").removeClass("wrong");
-  $(".photos img").removeClass("correct");
+  var images = $(".photos").find("img");
+  images.removeClass("wrong");
+  images.removeClass("correct");
 
   // hide results
   $(".results").fadeOut("fast");
@@ -54,7 +55,6 @@ function answer() {
   // don't allow question to be answered more than once
   if (question.answered)
     return;
-
   question.answered = true;
 
   // highlight photos wrong or right
@@ -102,7 +102,7 @@ function Game() {
   this.resetQuestions = function() {
     for (var i = 0; i < this.questions.length; i++)
       this.questions[i].answered = false;
-  }
+  };
 
   this.getQuestionsSize = function() {
     return this.questions.length;
