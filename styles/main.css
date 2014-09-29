@@ -12,7 +12,6 @@ html {
 
 html {
   font-family: 'Raleway', sans-serif;
-  position: fixed;
   width: 100%;
   height: 100%;
   left: 5;
@@ -84,6 +83,7 @@ html {
   width: 600px;
   text-align: center;
   margin: 0 auto;
+  font-size: 20px;
 }
 
 #quiz .title {
@@ -94,13 +94,22 @@ html {
   font-size: 60px;
 }
 
+#quiz .stats {
+  width: 410px;
+  margin: 0 auto;
+}
+
+#quiz .question-count {
+   float: left;
+}
+
 #quiz .score {
-  font-size: 30px;
+  float: right;
 }
 
 #quiz .question {
-  padding: 40px 0 20px 0;
-  font-size: 26px;
+  padding: 70px 0 20px 0;
+  font-size: 36px;
 }
 
 #quiz .status {
@@ -129,7 +138,6 @@ html {
 
 #quiz .results {
   display: none;
-  font-size: 26px;
   padding-top: 40px;
 }
 
