@@ -30,7 +30,7 @@ html {
   width: 800px;
   text-align: center;
   margin: 0 auto;
-  /*display: none;*/
+  display: none;
 }
 
 #intro h1 {
@@ -78,7 +78,7 @@ html {
 /* Quiz */
 
 #quiz {
-  display: none;
+  /*display: none;*/
   padding-top: 50px;
   width: 600px;
   text-align: center;
