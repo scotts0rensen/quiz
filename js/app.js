@@ -4,6 +4,7 @@ $(document).ready( function() {
   $("#start").click( startQuiz );
   $(".photos").find("img").click( answer );
   $("#next").click( next );
+  $("#again").click( startQuiz );
 });
 
 // =================================
@@ -13,13 +14,21 @@ var game = new Game();
 // =================================
 function startQuiz() {
   // switch from introduction screen to quiz if applicable
-  if ($("#intro").is(":visible")) {
-    $("#intro").fadeOut("fast", function() {
+  displayQuiz($("#intro"));
+
+  // switch from finish screen to quiz if applicable
+  displayQuiz($("#finish"));
+
+  displayQuestion(game.resetGame());
+}
+
+// =================================
+function displayQuiz(sectionToHide) {
+  if (sectionToHide.is(":visible")) {
+    sectionToHide.fadeOut("fast", function() {
       $("#quiz").fadeIn("fast");
     });
   }
-
-  displayQuestion(game.resetGame());
 }
 
 // =================================
@@ -32,9 +41,9 @@ function displayQuestion(question) {
   $(".results").fadeOut("fast");
 
   // display question
-  $("#question-index").html( question.number );
-  $("#question-count").html( game.getQuestionsSize() );
-  $("#score").text( game.score );
+  $(".question-index").html( question.number );
+  $(".question-count").html( game.getQuestionsSize() );
+  $(".score").text( game.score );
   $(".question").html( question.questionText );
   displayPhoto($("#photo1"), question.option1);
   displayPhoto($("#photo2"), question.option2);
@@ -71,16 +80,30 @@ function answer() {
 
 // =================================
 function displayResults(option) {
-  $("#score").text( game.score );
+  $(".score").text( game.score );
   $(".results-text").text(option.resultText);
-  $(".results").fadeIn("fast");
   $("#next").text( game.onLastQuestion() ? "Finish" : "Next");
+  $(".results").slideDown();
 }
 
 // =================================
 function next() {
-  var question = game.onLastQuestion() ? game.resetGame() : game.incrementQuestion();
-  displayQuestion(question);
+  if (game.onLastQuestion()) {
+    displayFinish();
+  }
+  else
+  {
+    displayQuestion(game.incrementQuestion());
+  }
+}
+
+// =================================
+function displayFinish() {
+  $("#quiz").fadeOut("fast", function() {
+    $("#finish").fadeIn("fast");
+  });
+
+  $(".score-text").text(game.getScoreText());
 }
 
 // =================================
@@ -122,16 +145,63 @@ function Game() {
     return this.currentQuestionIndex === this.getQuestionsSize() - 1;
   };
 
+  this.getScoreText = function () {
+    var pct = this.score / this.getQuestionsSize();
+    if (pct === 1.0)
+      return "Congratulations!  Perfect Score!";
+    if (pct >= 0.7)
+      return "Great Job!  You really know your poison ivy.";
+    if (pct >= 0.4)
+      return "You have some studying to do.  Be careful out there.";
+    if (pct >= 0.1)
+      return "Stay home.  It's safer for you indoors.";
+    else
+      return "Come on buddy.  You failed on purpose.";
+  };
+
   this.createQuestions = function() {
     var question1 = new Question(1, "Which one is poison ivy?",
-      new Option("images/test2.jpg", true, "Correct! Poison ivy has leaves of 3."),
-      new Option("images/test1.jpg", false, "Sorry. You chose the wrong one.  Poison ivy has leaves of 3."));
+      new Option("images/virginiacreeper.jpg", false, "Sorry.  This is Virginia Creeper with a group of 5 leaves.  Poison ivy has leaves of 3."),
+      new Option("images/poison-ivy1.jpg", true, "Correct!  Poison ivy has leaves of 3.  The other plant is Virginia Creeper."));
 
-    var question2 = new Question(2, "Yo... pick the poison ivy dude!",
-      new Option("images/test1.jpg", true, "Right on! Poison ivy has 3 leaves."),
-      new Option("images/test2.jpg", false, "Sorry. You chose a boxelder tree."));
+    var question2 = new Question(2, "Try this one.  Can you pick the poison ivy?",
+      new Option("images/wild_bean.jpg", false, "Incorrect.  While this wild bean plant has leaes of three, the leaves are the wrong shape."),
+      new Option("images/poison-ivy2.jpg", true, "Absolutely!  This is poison ivy."));
 
-    return [ question1, question2 ];
+    var question3 = new Question(3, "Only one of these photos is poison ivy.",
+      new Option("images/poison-ivy3.jpg", true, "YES!  This is indeed poison ivy."),
+      new Option("images/boxelder_2.jpg", false, "Sorry.  This isn't poison ivy.  It's a young boxelder tree."));
+
+    var question4 = new Question(4, "Which one is poison ivy?",
+      new Option("images/boxelder_1.jpg", false, "Nope.  Boxelder again.  Young boxelder is often mistaken for poison ivy.  Notice the two leaves lower on the branch opposite each other."),
+      new Option("images/poison-ivy4.jpg", true, "Absolutely!  This is poison ivy."));
+
+    var question5 = new Question(5, "Which one is safe to touch?",
+      new Option("images/poison-ivy5.jpg", true, "YES!  This is indeed poison ivy."),
+      new Option("images/strawberryleaves.jpg", false, "You can touch this plant, especially if you like strawberries."));
+
+    var question6 = new Question(6, "Can you identify the poison ivy?",
+      new Option("images/red_poison_ivy.jpg", true, "Bingo!  Poison ivy changes color in the fall.  The other plant is wild blackberry.  It's edges are too serrated to be poison ivy."),
+      new Option("images/wild_blackberry.jpg", false, "Sorry. This is wild blackberry.  Poison ivy does change color in the fall, and it's leaf edges are not serrated."));
+
+    var question7 = new Question(7, "Which one is poison ivy?",
+      new Option("images/not_poison_ivy.jpg", false, "This is not poison ivy.  It's leaves are too thin near the stem."),
+      new Option("images/poison-ivy7.jpg", true, "Absolutely!  This is poison ivy."));
+
+    var question8 = new Question(8, "Which one is poison ivy?",
+      new Option("images/wild_strawberry.jpeg", false, "No.  This is wild strawberry.  Notice how it's leave are too serrated?"),
+      new Option("images/poison-ivy8.jpg", true, "Absolutely!  This is poison ivy."));
+
+    var question9 = new Question(9, "Will the real poison ivy please step forward?",
+      new Option("images/hog_peanut.jpg", false, "No.  This is hog peanut."),
+      new Option("images/poison-ivy9.jpg", true, "Absolutely!  This is poison ivy."));
+
+    var question10 = new Question(10, "Poison ivy?",
+      new Option("images/Poison_Ivy_movie.jpg", true, "Holy Correct Answer Batman!"),
+      new Option("images/catwoman.jpg", false, "What??  You gotta be kidding."));
+
+    return [ question1, question2, question3, question4, question5, question6, question7, question8, question9, question10 ];
+    // return [ question1, question2 ];
   };
 
   this.questions = this.createQuestions();
