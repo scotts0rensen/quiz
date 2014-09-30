@@ -182,7 +182,7 @@ function Game() {
 
     var question6 = new Question(6, "Can you identify the poison ivy?",
       new Option("images/red_poison_ivy.jpg", true, "Bingo!  Poison ivy leaves change color in the fall.  The other plant is wild blackberry.  It's edges are too serrated to be poison ivy."),
-      new Option("images/wild_blackberry.jpg", false, "Sorry. This is wild blackberry.  Poison ivy leaves change color in the fall, and it's leaf edges are not serrated like blackberry."));
+      new Option("images/wild_blackberry.jpg", false, "Sorry. This is wild blackberry.  Poison ivy changes color in the fall, and it's leaf edges are not serrated like blackberry."));
 
     var question7 = new Question(7, "Which one is poison ivy?",
       new Option("images/not_poison_ivy.jpg", false, "This is not poison ivy.  It's leaves are too thin near the stem."),

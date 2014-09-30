@@ -123,7 +123,7 @@ button:hover {
 #quiz .photos img {
   width: 250px;
   margin: 5px;
-  border: solid 5px rgb(145,145,145);
+  border: solid 5px rgb(0,109,21);
 }
 
 #quiz img:hover {
